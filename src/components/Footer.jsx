@@ -1,4 +1,3 @@
-// Filename - components/Footer.js
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import AppContext from "../context/AppContext";
@@ -51,140 +50,35 @@ const Footer = () => {
       console.error(error);
     }
   };
+
   return (
     <div className="mt-4 pt-2 bg-slate-200">
       <section className="bg-black-50 sm:pt-16 lg:pt-24">
-        <div className="px-4 sm:px-6 lg:px-8 max-w-7xl ">
-          <div className="grid grid-cols-2 md:col-span-3 lg:grid-cols-6 gap-y-16 gap-x-12 ">
-            <div className="pl-2">
-              <p className="text-sm font-semibold text-black tracking-widest uppercase">
-                Company
-              </p>
+        <div className="px-4 sm:px-6 lg:px-8 max-w-7xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-y-8 gap-x-12">
+            
 
-              <ul className="mt-6 space-y-4 ">
-                <li>
-                  <a
-                    href="#"
-                    title=""
-                    className="flex text-base  text-gray-400 transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-                  >
-                    {" "}
-                    About{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    title=""
-                    className="flex text-base  text-gray-400 transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-                  >
-                    {" "}
-                    Features{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    title=""
-                    className="flex text-base  text-gray-400 transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-                  >
-                    {" "}
-                    Works{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    title=""
-                    className="flex  text-gray-400 text-base transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-                  >
-                    {" "}
-                    Career{" "}
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <p className="text-sm font-semibold tracking-widest text-black uppercase">
-                Help
-              </p>
-
-              <ul className="mt-6 space-y-4">
-                <li>
-                  <a
-                    href="#"
-                    title=""
-                    className="flex text-base  text-gray-400 transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-                  >
-                    {" "}
-                    Customer Support{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    title=""
-                    className="flex text-base text-gray-400 transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-                  >
-                    {" "}
-                    Delivery Details{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    title=""
-                    className="flex text-base text-gray-400 transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-                  >
-                    {" "}
-                    Terms & Conditions{" "}
-                  </a>
-                </li>
-
-                <li>
-                  <a
-                    href="#"
-                    title=""
-                    className="flex text-base text-gray-400 transition-all duration-200 hover:text-blue-600 focus:text-blue-600"
-                  >
-                    {" "}
-                    Privacy Policy{" "}
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="col-span-2 md:col-span-1 lg:col-span-2 lg:pl-8 px-4 text-center">
+            {/* Newsletter Section */}
+            <div className="col-span-1 sm:col-span-2 lg:col-span-2 lg:pl-8 px-4 text-center">
               <p className="font-semibold text-medium tracking-widest text-black uppercase">
-                Subscribe to newsletter
+                Subscribe to our Newsletter
               </p>
 
-              <form
-                action="#"
-                method="POST"
-                className="mt-6"
-                onSubmit={handleSubmit}
-              >
+              <form className="mt-6" onSubmit={handleSubmit}>
                 <div>
                   <textarea
                     cols="30"
                     rows="5"
                     value={message}
                     placeholder="Enter your message"
-                    className="resize-none w-full p-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
                     onChange={(e) => setMessage(e.target.value)}
+                    className="resize-none w-full p-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
-                  className=" px-6 py-3 my-2 font-semibold text-gray-500 bg-gray-50 hover-effect"
+                  className="mt-4 px-6 py-3 font-semibold text-white bg-blue-500 hover:bg-blue-600 rounded-lg shadow-md transition-all"
                 >
                   Subscribe
                 </button>
@@ -193,7 +87,6 @@ const Footer = () => {
           </div>
 
           <hr className="mt-16 mb-10 border-gray-200" />
-
           <p className="text-sm text-center text-gray-600">
             © Copyright 2021, All Rights Reserved by Postcraft
           </p>
@@ -202,4 +95,5 @@ const Footer = () => {
     </div>
   );
 };
+
 export default Footer;

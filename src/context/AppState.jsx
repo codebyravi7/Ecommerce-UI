@@ -39,7 +39,7 @@ function AppState(props) {
 
   useEffect(() => {
     let lstoken = localStorage.getItem("token");
-    // console.log("lstoken:: ", lstoken);
+    console.log("lstoken:: ", lstoken);
     if (lstoken && lstoken != "undefined") {
       setToken(lstoken);
       setIsAuthenticated(true);

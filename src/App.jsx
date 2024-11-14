@@ -14,14 +14,16 @@ import Address from "./components/Address";
 import Checkout from "./components/Checkout";
 import Orderconfirmation from "./components/Orderconfirmation";
 import Footer from './components/Footer'
+import AppContext from "./context/AppContext";
 function App() {
-  // const {data} = useContext(AppContext)
+  const {isAuthenticated} = useContext(AppContext)
   return (
     <Router>
       <Navbar />
       <ToastContainer />
       <Routes>
-        <Route path="/" element={<ShowProduct />} />
+        
+        <Route path="/" element={isAuthenticated ? <HomePage /> : <Login />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/product/search" element={<SearchProduct />} />
         <Route path="/register" element={<Register />} />
@@ -32,9 +34,20 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/orderconfirmation" element={<Orderconfirmation />} />
       </Routes>
-      <Footer />
+      
     </Router>
   );
 }
 
 export default App;
+
+
+
+const HomePage = ()=> {
+  return (
+    <div>
+      <ShowProduct />
+      <Footer />
+    </div>
+  )
+}

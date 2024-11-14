@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import AppContext from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
-// https://drive.google.com/file/d/1V8ei3gTva_iXjeCXQ4uK6Vm9tRc1o9Dg/view?usp=drive_link
 
 function Cart() {
   const { cart, decreaseQuantity, addToCart, removeFromCart, clearCart } =
@@ -13,60 +12,61 @@ function Cart() {
   useEffect(() => {
     let qty = 0;
     let price = 0;
-    /*the below code is different from tutor at 6:52 */
     if (cart?.items) {
       cart?.items?.forEach((item) => {
         qty += item?.qty;
-        price += item?.price;
+        price += item?.price * item?.qty; // Fixing price calculation to multiply by qty
       });
       setPrice(price);
       setQty(qty);
     }
   }, [cart]);
+
   return (
-    <div className="bg-white- content-wrapper  h-full min-w-screen max-w-screen min-h-screen p-2 text-black">
+    <div className="bg-gray-50 h-full min-w-screen max-w-screen min-h-screen p-4 text-black">
       {qty > 0 ? (
         <>
-          <div className="my-5 text-center">
-            <span className=" bg-gray-300 p-2 px-3 mx-1">
-              Total Qty : {qty}{" "}
+          <div className="my-5 text-center text-xl font-semibold">
+            <span className="bg-gray-200 p-2 px-4 mx-2 rounded-xl">
+              Total Qty: {qty}{" "}
             </span>
-            <span className="bg-gray-300 p-2 px-3 mx-1">
-              Total Price : {price}{" "}
+            <span className="bg-gray-200 p-2 px-4 mx-2 rounded-xl">
+              Total Price: ₹{price}{" "}
             </span>
           </div>
-          <div className="">
+
+          <div className="space-y-8">
             {cart?.items?.map((product) => (
               <div
                 key={product?._id}
-                className="relative bg-white flex m-8 mx-16 p-2 items-center rounded-lg text-gray-500"
+                className="relative bg-white flex p-4 items-center rounded-lg shadow-md"
               >
                 <div className="cart-img mr-4">
                   <img
                     src={product?.imgSrc}
                     alt={product?.title}
-                    className="w-32  rounded-lg"
+                    className="w-32 h-32 object-cover rounded-lg"
                   />
                 </div>
 
-                <div className="cart-info overflow-hidden ">
-                  <p className="text-2xl font-medium text-wrap">
-                    {product?.title}
-                  </p>
-                  <h3>{product?.price}</h3>
-                  <h3>Qty: {product?.qty}</h3>
+                <div className="cart-info flex-grow">
+                  <p className="text-xl font-medium">{product?.title}</p>
+                  <p className="text-gray-600">Price: ₹{product?.price}</p>
+                  <p className="text-gray-600">Qty: {product?.qty}</p>
                 </div>
-                <div className="action absolute right-0 max-w-1/4">
-                  <div className="btn bg-gray-200 hover-effect mx-1">
-                    <span
-                      className="material-symbols-outlined"
-                      onClick={() => decreaseQuantity(product?.productId, 1)}
-                    >
+
+                <div className="action absolute right-4 flex items-center space-x-3">
+                  <button
+                    className="btn bg-gray-200 hover:bg-gray-300 p-2 rounded-full"
+                    onClick={() => decreaseQuantity(product?.productId, 1)}
+                  >
+                    <span className="material-symbols-outlined text-lg">
                       do_not_disturb_on
                     </span>
-                  </div>
-                  <div
-                    className="btn bg-gray-200 hover-effect"
+                  </button>
+
+                  <button
+                    className="btn bg-gray-200 hover:bg-gray-300 p-2 rounded-full"
                     onClick={() =>
                       addToCart(
                         product?.productId,
@@ -77,51 +77,53 @@ function Cart() {
                       )
                     }
                   >
-                    <span className="material-symbols-outlined">
+                    <span className="material-symbols-outlined text-lg">
                       add_circle
                     </span>
-                  </div>
-                  <div
-                    className="btn bg-gray-200  hover-effect mx-1"
+                  </button>
+
+                  <button
+                    className="btn bg-gray-200 hover:bg-gray-300 p-2 rounded-full"
                     onClick={() => removeFromCart(product?.productId)}
                   >
-                    <span className="material-symbols-outlined">delete</span>
-                  </div>
+                    <span className="material-symbols-outlined text-lg">
+                      delete
+                    </span>
+                  </button>
                 </div>
               </div>
             ))}
           </div>
-          <div className="text-center">
-            <div
-              className="btn bg-gray-50 hover-effect mx-3"
+
+          <div className="text-center mt-6">
+            <button
+              className="btn bg-blue-500 text-white hover:bg-blue-600 px-6 py-3 rounded-lg shadow-md mx-3"
               onClick={() => navigate("/shipping")}
             >
               Checkout
-            </div>
-            <div
-              className="btn bg-gray-50 hover-effect mx-3"
+            </button>
+            <button
+              className="btn bg-red-500 text-white hover:bg-red-600 px-6 py-3 rounded-lg shadow-md mx-3"
               onClick={clearCart}
             >
               Clear Cart
-            </div>
+            </button>
           </div>
         </>
       ) : (
-        <div>
-          <div className="flex flex-col justify-center items-center ">
-            <img
-              src="https://img.freepik.com/free-vector/woman-pushing-shopping-cart-white-background_1308-43517.jpg?t=st=1724010114~exp=1724013714~hmac=3301bcee70eb80c133c40026275ef091651b2db346b56e89c181ddaea91105fa&w=740"
-              alt=""
-              className="w-96 bg-contain"
-            />
-            <h1 className="text-3xl ">Your Cart is Empty!!</h1>
-            <button
-              className="text-2xl m-4 p-2  bg-slate-300 hover-effect"
-              onClick={() => navigate("/")}
-            >
-              Shop Now
-            </button>
-          </div>
+        <div className="flex flex-col justify-center items-center">
+          <img
+            src="https://img.freepik.com/free-vector/woman-pushing-shopping-cart-white-background_1308-43517.jpg?t=st=1724010114~exp=1724013714~hmac=3301bcee70eb80c133c40026275ef091651b2db346b56e89c181ddaea91105fa&w=740"
+            alt="Empty Cart"
+            className="w-96 bg-contain"
+          />
+          <h1 className="text-3xl text-gray-600">Your Cart is Empty!</h1>
+          <button
+            className="btn bg-slate-300 hover:bg-slate-400 text-xl m-4 p-2 rounded-lg"
+            onClick={() => navigate("/")}
+          >
+            Shop Now
+          </button>
         </div>
       )}
     </div>
